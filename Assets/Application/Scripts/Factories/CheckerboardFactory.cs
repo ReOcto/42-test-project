@@ -12,10 +12,11 @@ namespace Application
     public sealed class CheckerboardFactory : IFactory<ICheckerboard>, IDisposable
     {
         private const string SETTINGS_KEY = "Assets/Templates/CrazyPawnSettings.asset";
+        private const string CELL_MATERIAL_KEY = "Assets/Application/CheckerboardCellMaterial.mat";
         private const float QUAD_SCALE = 1.5f;
 
         private readonly AsyncOperationHandle<CrazyPawnSettings> settingsHandle = Addressables.LoadAssetAsync<CrazyPawnSettings>(SETTINGS_KEY);
-        private readonly Shader defaultShader = Shader.Find("Universal Render Pipeline/Simple Lit");
+        private readonly AsyncOperationHandle<Material> cellMaterialHandle = Addressables.LoadAssetAsync<Material>(CELL_MATERIAL_KEY);
 
         [Inject] private readonly IRegistry<ICheckerboard> checkerboardRegistry; 
         
@@ -27,9 +28,10 @@ namespace Application
             CrazyPawnSettings settings = await settingsHandle;
             GameObject parent = new("Checkerboard");
 
+            Material baseMaterial = await cellMaterialHandle;
             if (cachedBlackMaterial == null)
             {
-                cachedBlackMaterial = new Material(defaultShader)
+                cachedBlackMaterial = new Material(baseMaterial)
                 {
                     color = settings.BlackCellColor,
                 };
@@ -37,7 +39,7 @@ namespace Application
 
             if (cachedWhiteMaterial == null)
             {
-                cachedWhiteMaterial = new Material(defaultShader)
+                cachedWhiteMaterial = new Material(baseMaterial)
                 {
                     color = settings.WhiteCellColor,
                 };

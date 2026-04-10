@@ -32,6 +32,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 36736540ad58246e3b0e1502e5a7ccc2
+    m_Address: Assets/Application/CheckerboardCellMaterial.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 57aceaac8c67c4011b2d4199e171b844, type: 2}
   m_SchemaSet:
