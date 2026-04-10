@@ -72,6 +72,10 @@ namespace Application
             }
         }
 
-        public void Dispose() => Addressables.Release(settingsHandle);
+        public void Dispose()
+        {
+            Addressables.Release(settingsHandle);
+            Addressables.Release(cellMaterialHandle);
+        }
     }
 }
